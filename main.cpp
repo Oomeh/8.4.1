@@ -16,6 +16,7 @@
 using namespace std;
     class Matrix{
     public:
+        
         Matrix(int n1, int n2, int n3, int n4){
             v[0][0]=n1;
             v[0][1]=n2;
@@ -42,6 +43,7 @@ using namespace std;
         void operator+(const int& rhs){
             add(rhs);
         }
+        
         void add(Matrix& m){
             for(int i = 0; i<2; i++)
             {
@@ -51,6 +53,32 @@ using namespace std;
                 }
             }
         }
+        
+        void subtract(const int& rhs){
+            for(int i = 0; i<2; i++)
+            {
+                for(int j = 0; j< 2; j++)
+                {
+                    v[i][j] -= rhs;
+                }
+            }
+        }
+        
+        void operator-(const int& rhs)
+            {
+                subtract(rhs);
+            }
+        
+        void subtract(Matrix& m){
+            for(int i = 0; i<2; i++)
+            {
+                for(int j = 0; j<2; j++)
+                {
+                    v[i][j] -= m.v[i][j];
+                }
+            }
+        }
+        
     private:
         int v[2][2];
     };
@@ -60,8 +88,17 @@ using namespace std;
 int main(int argc, char** argv) {
     
     Matrix m(3,4,5,6);
-    
+    m + 2;
+    m.print();
     
     Matrix n(3,7,2,5);
+    m.add(n);
+    m.print();
+    
+    m - 2;
+    m.print();
+    
+    m.subtract(n);
+    m.print();
     return 0;
 }
